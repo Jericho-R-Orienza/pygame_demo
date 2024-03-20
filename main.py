@@ -1,5 +1,5 @@
 import pygame
-from buttons import *
+from sprites import *
 from config import *
 import sys
 
