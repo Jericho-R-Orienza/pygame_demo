@@ -11,6 +11,14 @@ class Game:
         self.font = pygame.font.Font('Galaxus-z8Mow.ttf', 32)
         self.running = True
     
+    def createTileMap(self):
+        for i, row in enumerate(tilemap):
+            for j, column in enumerate(row):
+                if column == "W":
+                    Block(self, j, i)
+                if column == "P":
+                    Player(self, j, i)
+
     def new(self):
         #new game
         self.playing = True
@@ -20,7 +28,7 @@ class Game:
         self.enemies = pygame.sprite.LayeredUpdates()
         self.attacks = pygame.sprite.LayeredUpdates()
 
-        self.player = Player(self, 1, 2) #one on the x axis and 2 on the y axis (time tilezie)
+        self.createTileMap()
 
     def events(self):
         #game loop events
