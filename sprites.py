@@ -96,16 +96,24 @@ class Player(pygame.sprite.Sprite):
                     #we set the position of the player at 0,0 (top left) of the block and subtract the width of the player
                     # that way we are ensuring the the player is exactly touching the block at the very last pixel
                     self.rect.x = hits[0].rect.left - self.rect.width
+                     #we call a similar for loop in movement() but this time have all sprites move opposite that way camera stays in one spot when colliding
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.x += PLAYER_SPEED
                 if self.x_change < 0:
                     self.rect.x = hits[0].rect.right
-        
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.x -= PLAYER_SPEED
         if direction == "y":
             hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
             if hits:
                 if self.y_change > 0: #collide below
                     self.rect.y = hits[0].rect.top - self.rect.height #same logic as direction x
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.y += PLAYER_SPEED
                 if self.y_change < 0: #collide above
                     self.rect.y = hits[0].rect.bottom
+                    for sprite in self.game.all_sprites:
+                        sprite.rect.y -= PLAYER_SPEED
 
     def animate(self):
         down_animations = [self.game.character_spritesheet.get_sprite(3, 2, self.width, self.height),
