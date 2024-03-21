@@ -15,6 +15,7 @@ ENEMY_SPEED = 2
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
+WHITE = (255, 255, 255)
 
 #20 by 15 i.e. divide our window width and height by tilezie (32)
 #each W represents a wall while each . represents an open space
