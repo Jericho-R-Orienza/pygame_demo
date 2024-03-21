@@ -3,8 +3,9 @@ WIN_HEIGHT = 480
 TILESIZE = 32
 FPS = 60
 
-PLAYER_LAYER = 2 #when we layer our game, we want our player to be in its own layer - i.e. bg layer would be 0
-BLOCK_LAYER = 1
+PLAYER_LAYER = 3 #when we layer our game, we want our player to be in its own layer - i.e. bg layer would be 0
+BLOCK_LAYER = 2
+GROUND_LAYER = 1
 
 PLAYER_SPEED = 3
 

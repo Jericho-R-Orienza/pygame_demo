@@ -10,10 +10,15 @@ class Game:
         self.clock = pygame.time.Clock()
         self.font = pygame.font.Font('Galaxus-z8Mow.ttf', 32)
         self.running = True
-    
+
+        #init sprite sheets
+        self.character_spritesheet = Spritesheet('img/character.png')
+        self.terrain_spritesheet = Spritesheet('img/terrain.png')
+
     def createTileMap(self):
         for i, row in enumerate(tilemap):
             for j, column in enumerate(row):
+                Ground(self, j, i)
                 if column == "W":
                     Block(self, j, i)
                 if column == "P":
