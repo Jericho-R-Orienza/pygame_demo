@@ -45,9 +45,10 @@ class Player(pygame.sprite.Sprite):
 
     def update(self):
         self.movement()
-
         self.rect.x += self.x_change
+        self.collide_blocks('x')
         self.rect.y += self.y_change
+        self.collide_blocks('y')
 
         self.x_change = 0
         self.y_change = 0
@@ -66,6 +67,26 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_DOWN]:
             self.y_change += PLAYER_SPEED
             self.facing = 'down'
+
+    def collide_blocks(self, direction):
+        if direction == "x":
+            #hits returns a boolean if sprite collides with block -> returns the position of the block as well
+            hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
+            if hits: #we need to check what direction the collision is from
+                if self.x_change > 0: #colliding from left
+                    #we set the position of the player at 0,0 (top left) of the block and subtract the width of the player
+                    # that way we are ensuring the the player is exactly touching the block at the very last pixel
+                    self.rect.x = hits[0].rect.left - self.rect.width
+                if self.x_change < 0:
+                    self.rect.x = hits[0].rect.right
+        
+        if direction == "y":
+            hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
+            if hits:
+                if self.y_change > 0: #collide below
+                    self.rect.y = hits[0].rect.top - self.rect.height #same logic as direction x
+                if self.y_change < 0: #collide above
+                    self.rect.y = hits[0].rect.bottom
 
 class Block(pygame.sprite.Sprite):
     def __init__(self, game, x, y):
